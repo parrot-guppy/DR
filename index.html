@@ -11,8 +11,19 @@
     <form>
       <label for="domain-input">Enter domain:</label>
       <input type="text" id="domain-input" name="domain-input">
-      <button type="button" onclick="searchDomain()">Search</button>
+      <button type="button" onclick="searchDomain()">Search All</button>
     </form>
+
+    <h2>Search individual sources:</h2>
+    <ul>
+      <li><button type="button" onclick="searchGoogle()">Google</button></li>
+      <li><button type="button" onclick="searchBing()">Bing</button></li>
+      <li><button type="button" onclick="searchDomainTools()">DomainTools</button></li>
+      <li><button type="button" onclick="searchShodan()">Shodan</button></li>
+      <li><button type="button" onclick="searchCrtSh()">crt.sh</button></li>
+    </ul>
+
+    <p><strong>Note:</strong> Popups must be enabled to use this tool.</p>
 
     <script>
       function searchDomain() {
@@ -28,7 +39,40 @@
         ];
         
         // Open each resource URL in a new tab
-        resourceUrls.forEach(url => window.open(url));
+        resourceUrls.forEach(url => {
+          const tab = window.open(url, '_blank');
+          tab.close();
+        });
+      }
+
+      function searchGoogle() {
+        const domain = document.getElementById('domain-input').value;
+        const url = `https://www.google.com/search?q=site:${domain}`;
+        window.open(url, '_blank');
+      }
+
+      function searchBing() {
+        const domain = document.getElementById('domain-input').value;
+        const url = `https://www.bing.com/search?q=site:${domain}`;
+        window.open(url, '_blank');
+      }
+
+      function searchDomainTools() {
+        const domain = document.getElementById('domain-input').value;
+        const url = `https://whois.domaintools.com/${domain}`;
+        window.open(url, '_blank');
+      }
+
+      function searchShodan() {
+        const domain = document.getElementById('domain-input').value;
+        const url = `https://www.shodan.io/search?query=${domain}`;
+        window.open(url, '_blank');
+      }
+
+      function searchCrtSh() {
+        const domain = document.getElementById('domain-input').value;
+        const url = `https://crt.sh/?q=${domain}`;
+        window.open(url, '_blank');
       }
     </script>
   </body>
