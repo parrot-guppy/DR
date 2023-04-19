@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>Domain Research</title>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  </head>
+  <body>
+    <h1>Domain Research</h1>
+    
+    <form>
+      <label for="domain-input">Enter domain:</label>
+      <input type="text" id="domain-input" name="domain-input">
+      <button type="button" onclick="searchDomain()">Search</button>
+    </form>
+
+    <script>
+      function searchDomain() {
+        const domain = document.getElementById('domain-input').value;
+        
+        // List of OSINT resource URLs with placeholders for the domain name
+        const resourceUrls = [
+          `https://www.google.com/search?q=site:${domain}`,
+          `https://www.bing.com/search?q=site:${domain}`,
+          `https://whois.domaintools.com/${domain}`,
+          `https://www.shodan.io/search?query=${domain}`,
+          `https://crt.sh/?q=${domain}`,
+        ];
+        
+        // Open each resource URL in a new tab
+        resourceUrls.forEach(url => window.open(url));
+      }
+    </script>
+  </body>
+</html>
