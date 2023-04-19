@@ -1,1 +1,1 @@
-# DomainResearcher.github.io
+# Domain Researcher
