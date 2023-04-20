@@ -16,11 +16,12 @@
 
     <h2>Search individual sources:</h2>
     <ul>
-      <li><button type="button" onclick="searchGoogle()">Google</button></li>
-      <li><button type="button" onclick="searchBing()">Bing</button></li>
       <li><button type="button" onclick="searchDomainTools()">DomainTools</button></li>
-      <li><button type="button" onclick="searchShodan()">Shodan</button></li>
-      <li><button type="button" onclick="searchCrtSh()">crt.sh</button></li>
+      <li><button type="button" onclick="searchHostio">Host.io</button></li>
+      <li><button type="button" onclick="searchWellKnown()">Well-Known.dev</button></li>
+      <li><button type="button" onclick="searchArchive">Web Archive</button></li>
+      <li><button type="button" onclick="searchWebsiteInformer()">Website Informer</button></li>
+      <li><button type="button" onclick="searchSkymem()">Skymem</button></li>
     </ul>
 
     <p><strong>Note:</strong> Popups must be enabled to use this tool.</p>
@@ -31,11 +32,12 @@
         
         // List of OSINT resource URLs with placeholders for the domain name
         const resourceUrls = [
-          `https://www.google.com/search?q=site:${domain}`,
-          `https://www.bing.com/search?q=site:${domain}`,
           `https://whois.domaintools.com/${domain}`,
-          `https://www.shodan.io/search?query=${domain}`,
-          `https://crt.sh/?q=${domain}`,
+          `https://host.io/${domain}`,
+          `https://well-known.dev/?q=${domain}#results`,
+          `http://web.archive.org/web/*/${domain}`,
+          `https://website.informer.com/${domain}/emails`,
+          `https://www.skymem.info/srch?q=${domain}`
         ];
         
         // Open each resource URL in a new tab
@@ -44,36 +46,43 @@
           tab.close();
         });
       }
-
-      function searchGoogle() {
-        const domain = document.getElementById('domain-input').value;
-        const url = `https://www.google.com/search?q=site:${domain}`;
-        window.open(url, '_blank');
-      }
-
-      function searchBing() {
-        const domain = document.getElementById('domain-input').value;
-        const url = `https://www.bing.com/search?q=site:${domain}`;
-        window.open(url, '_blank');
-      }
-
+      
       function searchDomainTools() {
         const domain = document.getElementById('domain-input').value;
         const url = `https://whois.domaintools.com/${domain}`;
         window.open(url, '_blank');
       }
-
-      function searchShodan() {
+      
+      function searchHostio() {
         const domain = document.getElementById('domain-input').value;
-        const url = `https://www.shodan.io/search?query=${domain}`;
+        const url = `https://host.io/${domain}`;
         window.open(url, '_blank');
       }
-
-      function searchCrtSh() {
+      
+      function searchWellKnown() {
         const domain = document.getElementById('domain-input').value;
-        const url = `https://crt.sh/?q=${domain}`;
+        const url = `https://well-known.dev/?q=${domain}#results`;
         window.open(url, '_blank');
       }
+      
+      function searchArchive() {
+        const domain = document.getElementById('domain-input').value;
+        const url = `http://web.archive.org/web/*/${domain}`;
+        window.open(url, '_blank');
+      }
+      
+      function searchWebsiteInformer() {
+        const domain = document.getElementById('domain-input').value;
+        const url = `https://website.informer.com/${domain}/emails`;
+        window.open(url, '_blank');
+      }
+      
+      function searchSkymem() {
+        const domain = document.getElementById('domain-input').value;
+        const url = `https://www.skymem.info/srch?q=${domain}`;
+        window.open(url, '_blank');
+      }
+      
     </script>
   </body>
 </html>
