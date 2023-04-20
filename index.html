@@ -14,12 +14,13 @@
       <button type="button" onclick="searchDomain()">Search All</button>
     </form>
 
+    // If you wanted to search individual sources
     <h2>Search individual sources:</h2>
     <ul>
       <li><button type="button" onclick="searchDomainTools()">DomainTools</button></li>
-      <li><button type="button" onclick="searchHostio">Host.io</button></li>
+      <li><button type="button" onclick="searchHostio()">Host.io</button></li>
       <li><button type="button" onclick="searchWellKnown()">Well-Known.dev</button></li>
-      <li><button type="button" onclick="searchArchive">Web Archive</button></li>
+      <li><button type="button" onclick="searchArchive()">Web Archive</button></li>
       <li><button type="button" onclick="searchWebsiteInformer()">Website Informer</button></li>
       <li><button type="button" onclick="searchSkymem()">Skymem</button></li>
     </ul>
@@ -30,7 +31,7 @@
       function searchDomain() {
         const domain = document.getElementById('domain-input').value;
         
-        // List of OSINT resource URLs with placeholders for the domain name
+        // List of OSINT resource URLs
         const resourceUrls = [
           `https://whois.domaintools.com/${domain}`,
           `https://host.io/${domain}`,
