@@ -85,23 +85,27 @@
         window.open(url, '_blank');
       }
       
-       function getGoogleTag() {
-          const domain = document.getElementById('domain-input').value;
-          const url = `https://${domain}/`;
+      function getGoogleTag() {
+        const domain = document.getElementById('domain-input').value;
+        const url = `https://${domain}/`;
 
-          window.addEventListener('load', function() {
-            fetch(url)
-              .then(response => response.text())
-              .then(data => {
-                const parser = new DOMParser();
-                const doc = parser.parseFromString(data, "text/html");
-                const googleTag = doc.querySelector('script[src*="googletagmanager.com"]');
-                const message = googleTag ? `Google Tag found: ${googleTag.src}` : 'Google Tag not found.';
-                document.getElementById('pivotsArea').value = message;
-              })
-              .catch(error => console.error(error));
-          });
-        }
+        console.log('Fetching:', url);
+
+        window.addEventListener('load', function() {
+          fetch(url)
+            .then(response => response.text())
+            .then(data => {
+              console.log('Data:', data);
+              const parser = new DOMParser();
+              const doc = parser.parseFromString(data, "text/html");
+              const googleTag = doc.querySelector('script[src*="googletagmanager.com"]');
+              const message = googleTag ? `Google Tag found: ${googleTag.src}` : 'Google Tag not found.';
+              console.log('Message:', message);
+              document.getElementById('pivotsArea').value = message;
+            })
+            .catch(error => console.error(error));
+        });
+      }
 
     </script>
   </body>
