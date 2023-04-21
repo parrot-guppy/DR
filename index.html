@@ -12,8 +12,9 @@
       <label for="domain-input">Enter domain:</label>
       <input type="text" id="domain-input" name="domain-input">
       <button type="button" onclick="searchDomain()">Search All</button>
+      <button onclick="getGoogleTag()">Get Google Tag</button>
     </form>
-
+    
     <h2>Search individual sources:</h2>
     <ul>
       <li><button type="button" onclick="searchDomainTools()">DomainTools</button></li>
@@ -23,8 +24,6 @@
       <li><button type="button" onclick="searchWebsiteInformer()">Website Informer</button></li>
       <li><button type="button" onclick="searchSkymem()">Skymem</button></li>
     </ul>
-    
-    <textarea id="html-textarea" rows="10"></textarea>
 
     <p><strong>Note:</strong> Popups must be enabled to use this tool.</p>
 
@@ -84,6 +83,24 @@
         window.open(url, '_blank');
       }
       
+      function getGoogleTag() {
+        const domain = document.getElementById('domain-input').value;
+        const url = `https://${domain}/`;
+        fetch(url)
+          .then(response => response.text())
+          .then(data => {
+      const parser = new DOMParser();
+      const doc = parser.parseFromString(data, "text/html");
+      const googleTag = doc.querySelector('script[src*="googletagmanager.com"]');
+      if (googleTag) {
+        console.log(googleTag.src);
+      } else {
+        console.log('Google tag not found.');
+      }
+    })
+    .catch(error => console.error(error));
+}
+
     </script>
   </body>
 </html>
