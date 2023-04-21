@@ -88,17 +88,21 @@
       function getGoogleTag() {
         const domain = document.getElementById('domain-input').value;
         const url = `https://${domain}/`;
-        fetch(url)
-          .then(response => response.text())
-          .then(data => {
-            const parser = new DOMParser();
-            const doc = parser.parseFromString(data, "text/html");
-            const googleTag = doc.querySelector('script[src*="googletagmanager.com"]');
-            const message = googleTag ? `Google Tag found: ${googleTag.src}` : 'Google Tag not found.';
-            document.getElementById('pivotsArea').value = message;
-          })
-          .catch(error => console.error(error));
+
+        window.addEventListener('load', function() {
+          fetch(url)
+            .then(response => response.text())
+            .then(data => {
+              const parser = new DOMParser();
+              const doc = parser.parseFromString(data, "text/html");
+              const googleTag = doc.querySelector('script[src*="googletagmanager.com"]');
+              const message = googleTag ? `Google Tag found: ${googleTag.src}` : 'Google Tag not found.';
+              document.getElementById('pivotsArea').value = message;
+            })
+            .catch(error => console.error(error));
+        });
 }
+
 
     </script>
   </body>
