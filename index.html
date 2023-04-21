@@ -13,6 +13,12 @@
       <input type="text" id="domain-input" name="domain-input">
       <button type="button" onclick="searchDomain()">Search All</button>
     </form>
+    
+    <form onsubmit="return loadDomainHtml()">
+      <label for="domain-input">Enter domain:</label>
+      <input type="text" id="domain-input" name="domain-input">
+      <button type="submit">Load HTML</button>
+    </form>
 
     <h2>Search individual sources:</h2>
     <ul>
@@ -23,6 +29,8 @@
       <li><button type="button" onclick="searchWebsiteInformer()">Website Informer</button></li>
       <li><button type="button" onclick="searchSkymem()">Skymem</button></li>
     </ul>
+    
+    <textarea id="html-textarea" rows="10"></textarea>
 
     <p><strong>Note:</strong> Popups must be enabled to use this tool.</p>
 
@@ -80,6 +88,21 @@
         const domain = document.getElementById('domain-input').value;
         const url = `https://www.skymem.info/srch?q=${domain}`;
         window.open(url, '_blank');
+      }
+      
+      function loadDomainHtml() {
+        const domainInput = document.getElementById('domain-input');
+        const domain = domainInput.value;
+
+        fetch(`https://${domain}`)
+          .then(response => response.text())
+          .then(html => {
+            const htmlTextarea = document.getElementById('html-textarea');
+            htmlTextarea.value = html;
+          })
+          .catch(error => console.error(error));
+
+        return false; // Prevent form submission
       }
       
     </script>
