@@ -26,6 +26,8 @@
     </ul>
 
     <p><strong>Note:</strong> Popups must be enabled to use this tool.</p>
+    
+    <textarea id="pivotsArea" rows="4"></textarea>
 
     <script>
       function searchDomain() {
@@ -84,21 +86,19 @@
       }
       
       function getGoogleTag() {
-  const domain = document.getElementById('domain-input').value;
-  const url = `https://${domain}/`;
-  fetch(url)
-    .then(response => response.text())
-    .then(data => {
-      const parser = new DOMParser();
-      const doc = parser.parseFromString(data, "text/html");
-      const googleTag = doc.querySelector('script[src*="googletagmanager.com"]');
-      if (googleTag) {
-        alert(`Google Tag found: ${googleTag.src}`);
-      } else {
-        alert('Google Tag not found.');
-      }
-    })
-    .catch(error => console.error(error));
+        const domain = document.getElementById('domain-input').value;
+        const url = `https://${domain}/`;
+        fetch(url)
+          .then(response => response.text())
+          .then(data => {
+            const parser = new DOMParser();
+            const doc = parser.parseFromString(data, "text/html");
+            const googleTag = doc.querySelector('script[src*="googletagmanager.com"]');
+            const message = googleTag ? `Google Tag found: ${googleTag.src}` : 'Google Tag not found.';
+            document.getElementById('pivotsArea').value = message;
+          })
+          .catch(error => console.error(error));
+}
 
     </script>
   </body>
